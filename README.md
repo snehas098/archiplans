@@ -1,0 +1,945 @@
+[index.html.html](https://github.com/user-attachments/files/23611448/index.html.html)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architectural Plans | Design Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #e2e8f0;
+            --accent-color: #e53e3e;
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: var(--white);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        h1, h2, h3, h4 {
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 10px 0;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            color: var(--white);
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Plans Section */
+        .plans-section {
+            background-color: var(--secondary-color);
+        }
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .plan-card {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+            background-color: var(--white);
+        }
+
+        .plan-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .plan-image {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .plan-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .plan-card:hover .plan-image img {
+            transform: scale(1.1);
+        }
+
+        .plan-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .plan-info {
+            padding: 20px;
+        }
+
+        .plan-info h3 {
+            margin-bottom: 10px;
+        }
+
+        .plan-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .plan-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .plan-actions .btn {
+            padding: 8px 15px;
+            font-size: 0.9rem;
+        }
+
+        /* Upload Section */
+        .upload-section {
+            background-color: var(--white);
+        }
+
+        .upload-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--secondary-color);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .upload-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .file-upload {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-upload-btn {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .file-upload-btn:hover {
+            background-color: #2c5282;
+        }
+
+        .file-upload-btn i {
+            margin-right: 10px;
+        }
+
+        .file-upload input[type="file"] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .upload-preview {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .upload-preview img {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 4px;
+            box-shadow: var(--shadow);
+        }
+
+        /* Modal for Plan Details */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            overflow: auto;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 1000px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .modal-plan-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .modal-plan-image img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .modal-plan-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .modal-plan-meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .meta-item {
+            margin-bottom: 10px;
+        }
+
+        .meta-label {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+
+        .footer-column {
+            flex: 1;
+            margin-right: 30px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .modal-plan-details {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 0;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: var(--white);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 50px;
+                transition: left 0.3s ease;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hamburger span {
+                display: block;
+                width: 25px;
+                height: 3px;
+                background-color: var(--text-dark);
+                margin: 5px 0;
+                transition: all 0.3s ease;
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .upload-form {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+
+            .footer-column {
+                margin-right: 0;
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header id="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">ArchDesign</a>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#plans">Plans</a></li>
+                    <li><a href="#upload">Upload Plans</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Professional Architectural Plans</h1>
+                <p>Browse, upload, and manage your architectural designs in one place. Showcase your work to potential clients and collaborators.</p>
+                <a href="#plans" class="btn">View Plans</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Plans Section -->
+    <section id="plans" class="plans-section">
+        <div class="container">
+            <h2>Architectural Plans</h2>
+            <div class="plans-grid" id="plansGrid">
+                <!-- Plan cards will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Upload Section -->
+    <section id="upload" class="upload-section">
+        <div class="container">
+            <h2>Upload Your Plans</h2>
+            <div class="upload-container">
+                <form id="uploadForm" class="upload-form">
+                    <div class="form-group">
+                        <label for="planTitle">Plan Title</label>
+                        <input type="text" id="planTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="planType">Plan Type</label>
+                        <select id="planType" required>
+                            <option value="">Select Type</option>
+                            <option value="residential">Residential</option>
+                            <option value="commercial">Commercial</option>
+                            <option value="landscape">Landscape</option>
+                            <option value="interior">Interior Design</option>
+                        </select>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="planDescription">Description</label>
+                        <textarea id="planDescription" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="planArea">Area (sq ft)</label>
+                        <input type="number" id="planArea" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="planRooms">Number of Rooms</label>
+                        <input type="number" id="planRooms" required>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Upload Plan Image</label>
+                        <div class="file-upload">
+                            <div class="file-upload-btn">
+                                <i class="fas fa-cloud-upload-alt"></i> Choose File
+                            </div>
+                            <input type="file" id="planImage" accept="image/*" required>
+                        </div>
+                        <div class="upload-preview">
+                            <img id="imagePreview" src="#" alt="Preview" style="display: none;">
+                        </div>
+                    </div>
+                    <div class="form-group full-width">
+                        <button type="submit" class="btn">Upload Plan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Plan Details Modal -->
+    <div id="planModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-plan-details" id="modalContent">
+                <!-- Modal content will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>ArchDesign</h3>
+                    <p>Creating exceptional architectural designs that stand the test of time.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#plans">Plans</a></li>
+                        <li><a href="#upload">Upload Plans</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Design Street, Creative City</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> info@archdesign.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 ArchDesign. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sample plan data
+        const samplePlans = [
+            {
+                id: 1,
+                title: "Modern Hillside Residence",
+                type: "residential",
+                description: "A contemporary home designed to maximize views while blending seamlessly with its natural surroundings. Features open floor plan, large windows, and sustainable materials.",
+                area: 3200,
+                rooms: 4,
+                image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                date: "2023-06-15"
+            },
+            {
+                id: 2,
+                title: "Urban Commercial Complex",
+                type: "commercial",
+                description: "A mixed-use development featuring retail spaces, offices, and public gathering areas in the city center. Emphasizes pedestrian-friendly design and green spaces.",
+                area: 15000,
+                rooms: 12,
+                image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                date: "2023-05-22"
+            },
+            {
+                id: 3,
+                title: "Community Cultural Center",
+                type: "commercial",
+                description: "An innovative space designed to foster community engagement through art, performance, and education. Includes gallery spaces, theater, and workshop areas.",
+                area: 8500,
+                rooms: 8,
+                image: "https://images.unsplash.com/photo-1548637505-4e8e8c2c9e33?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                date: "2023-04-10"
+            }
+        ];
+
+        // DOM Elements
+        const plansGrid = document.getElementById('plansGrid');
+        const uploadForm = document.getElementById('uploadForm');
+        const planImage = document.getElementById('planImage');
+        const imagePreview = document.getElementById('imagePreview');
+        const planModal = document.getElementById('planModal');
+        const modalContent = document.getElementById('modalContent');
+        const closeModal = document.querySelector('.close-modal');
+
+        // Initialize the page with sample plans
+        document.addEventListener('DOMContentLoaded', function() {
+            renderPlans();
+            
+            // Mobile Navigation Toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                });
+            });
+
+            // Header scroll effect
+            window.addEventListener('scroll', () => {
+                const header = document.getElementById('header');
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Image preview for upload
+            planImage.addEventListener('change', function() {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.addEventListener('load', function() {
+                        imagePreview.style.display = 'block';
+                        imagePreview.src = reader.result;
+                    });
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Form submission
+            uploadForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const title = document.getElementById('planTitle').value;
+                const type = document.getElementById('planType').value;
+                const description = document.getElementById('planDescription').value;
+                const area = document.getElementById('planArea').value;
+                const rooms = document.getElementById('planRooms').value;
+                const imageFile = document.getElementById('planImage').files[0];
+                
+                // Create a new plan object
+                const newPlan = {
+                    id: samplePlans.length + 1,
+                    title: title,
+                    type: type,
+                    description: description,
+                    area: parseInt(area),
+                    rooms: parseInt(rooms),
+                    image: imagePreview.src,
+                    date: new Date().toISOString().split('T')[0]
+                };
+                
+                // Add to sample plans
+                samplePlans.unshift(newPlan);
+                
+                // Re-render plans
+                renderPlans();
+                
+                // Reset form
+                uploadForm.reset();
+                imagePreview.style.display = 'none';
+                
+                // Show success message
+                alert('Plan uploaded successfully!');
+            });
+
+            // Close modal when clicking the X
+            closeModal.addEventListener('click', function() {
+                planModal.style.display = 'none';
+            });
+
+            // Close modal when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target === planModal) {
+                    planModal.style.display = 'none';
+                }
+            });
+        });
+
+        // Function to render plans
+        function renderPlans() {
+            plansGrid.innerHTML = '';
+            
+            samplePlans.forEach(plan => {
+                const planCard = document.createElement('div');
+                planCard.className = 'plan-card';
+                planCard.innerHTML = `
+                    <div class="plan-image">
+                        <img src="${plan.image}" alt="${plan.title}">
+                        <div class="plan-badge">${plan.type}</div>
+                    </div>
+                    <div class="plan-info">
+                        <h3>${plan.title}</h3>
+                        <div class="plan-meta">
+                            <span><i class="fas fa-ruler-combined"></i> ${plan.area} sq ft</span>
+                            <span><i class="fas fa-door-open"></i> ${plan.rooms} rooms</span>
+                        </div>
+                        <p>${plan.description.substring(0, 100)}...</p>
+                        <div class="plan-actions">
+                            <button class="btn view-plan" data-id="${plan.id}">View Details</button>
+                            <button class="btn download-plan" data-id="${plan.id}">Download</button>
+                        </div>
+                    </div>
+                `;
+                plansGrid.appendChild(planCard);
+            });
+            
+            // Add event listeners to view buttons
+            document.querySelectorAll('.view-plan').forEach(button => {
+                button.addEventListener('click', function() {
+                    const planId = parseInt(this.getAttribute('data-id'));
+                    showPlanDetails(planId);
+                });
+            });
+            
+            // Add event listeners to download buttons
+            document.querySelectorAll('.download-plan').forEach(button => {
+                button.addEventListener('click', function() {
+                    const planId = parseInt(this.getAttribute('data-id'));
+                    downloadPlan(planId);
+                });
+            });
+        }
+
+        // Function to show plan details in modal
+        function showPlanDetails(planId) {
+            const plan = samplePlans.find(p => p.id === planId);
+            if (plan) {
+                modalContent.innerHTML = `
+                    <div class="modal-plan-image">
+                        <img src="${plan.image}" alt="${plan.title}">
+                    </div>
+                    <div class="modal-plan-info">
+                        <h3>${plan.title}</h3>
+                        <div class="modal-plan-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">Type:</span> ${plan.type.charAt(0).toUpperCase() + plan.type.slice(1)}
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Area:</span> ${plan.area} sq ft
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Rooms:</span> ${plan.rooms}
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Date:</span> ${plan.date}
+                            </div>
+                        </div>
+                        <p>${plan.description}</p>
+                        <button class="btn download-plan" data-id="${plan.id}">Download Plan</button>
+                    </div>
+                `;
+                
+                // Add event listener to download button in modal
+                modalContent.querySelector('.download-plan').addEventListener('click', function() {
+                    downloadPlan(planId);
+                });
+                
+                planModal.style.display = 'block';
+            }
+        }
+
+        // Function to handle plan download
+        function downloadPlan(planId) {
+            const plan = samplePlans.find(p => p.id === planId);
+            if (plan) {
+                // In a real application, this would download the actual plan file
+                // For this demo, we'll just show an alert
+                alert(`Downloading "${plan.title}" plan. In a real application, this would download the PDF/DWG file.`);
+            }
+        }
+    </script>
+</body>
+</html>
